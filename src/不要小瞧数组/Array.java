@@ -59,13 +59,14 @@ public class Array<E> {
     //向数组中添加数据
     public void add(int index,E e){
 
-        if (size == data.length){
-            throw new IllegalArgumentException("无法插入，数组已满");
-        }
-
-        if (index < 0 || index >= data.length){
+        if (index < 0 || index > size){
             throw new IllegalArgumentException("index 需要满足 index>0 and index<capacity");
         }
+
+        if (size == data.length){
+            resize(data.length * 2);
+        }
+
 
         for (int i = size-1; i >= index; i--) {
             data[i+1] = data[i];
@@ -103,16 +104,21 @@ public class Array<E> {
     //删除数组中某一位置的元素,并返回该元素
     public E remove(int index){
 
-        if (index < 0 || index >= data.length){
+        if (index < 0 || index >= size){
             throw new IllegalArgumentException("index 需要满足 index>0 and index<capacity");
         }
 
         E e = data[index];
-        for (int i = index; i <= size-1; i++) {
+        for (int i = index; i < size-1; i++) {
             data[i] = data[i+1];
         }
         size --;
         data[size] = null;
+        //直接将数组大小调整到一半，此时数组仍然是满的，当再次执行add操作时，又出发resize操作，时间复杂度变为O（n）
+        //所以采用lazy的方式
+        if (size == data.length/4 && data.length/2 != 0){
+            resize(data.length/2);
+        }
         return e;
     }
 
@@ -149,5 +155,14 @@ public class Array<E> {
         }
         stringBuilder.append("]");
         return stringBuilder.toString();
+    }
+
+    //动态数组扩容操作
+    private void resize(int newCapacity){
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
     }
 }
