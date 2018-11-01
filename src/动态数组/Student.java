@@ -1,4 +1,4 @@
-package 不要小瞧数组;
+package 动态数组;
 
 public class Student {
     private String name;

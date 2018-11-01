@@ -1,6 +1,6 @@
 package 栈和队列;
 
-import 不要小瞧数组.Array;
+import 动态数组.Array;
 
 public class ArrayStack<E> implements Stack<E> {
 

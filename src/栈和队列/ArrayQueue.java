@@ -1,6 +1,6 @@
 package 栈和队列;
 
-import 不要小瞧数组.Array;
+import 动态数组.Array;
 
 /**
 *@Description: 数组实现的普通队列，缺点dequeue的时间复杂度为O（n）

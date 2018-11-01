@@ -1,4 +1,4 @@
-package 不要小瞧数组;
+package 动态数组;
 
 /**
 *@Description: 实现自定义的Array
