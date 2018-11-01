@@ -28,6 +28,8 @@ public class TestQueue {
         System.out.println("arrayQueue用时： " + countTime(arrayQueue,count) + " s");
         LoopQueue<Integer> loopQueue = new LoopQueue<>();
         System.out.println("loopQueue用时： " + countTime(loopQueue,count) + " s");
+        LinkedListQueue<Integer> linkedListQueue = new LinkedListQueue<>();
+        System.out.println("linkedListQueue用时： " + countTime(linkedListQueue,count) + " s");
 
     }
 }
