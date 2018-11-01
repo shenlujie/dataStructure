@@ -1,4 +1,4 @@
-package 优先队列和堆;
+package 栈和队列;
 
 public interface Stack<E> {
 
