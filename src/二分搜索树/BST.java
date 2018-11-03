@@ -1,7 +1,11 @@
 package 二分搜索树;
 
 import 栈和队列.ArrayStack;
+import 栈和队列.LoopQueue;
+import 栈和队列.Queue;
 import 栈和队列.Stack;
+
+import java.util.Random;
 
 public class BST<E extends Comparable<E>> {
     private class Node{
@@ -135,6 +139,139 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    //用户调用的层序遍历非递归实现方式
+    public void levelOrder(){
+        Queue<Node> queue = new LoopQueue<>();
+        queue.enqueue(root);
+        while (!queue.isEmpty()){
+            Node cur = queue.dequeue();
+            System.out.println(cur.e);
+            if (cur.left != null){
+                queue.enqueue(cur.left);
+            }
+            if (cur.right != null){
+                queue.enqueue(cur.right);
+            }
+        }
+    }
+
+    //用户调用寻找最小节点
+    public E minimum(){
+        if (isEmpty()){
+            throw new IllegalArgumentException("dst has been empty");
+        }
+        return minimum(root).e;
+    }
+
+    //递归方式实现寻找最小节点
+    private Node minimum(Node node){
+        if (node.left == null){
+            return node;
+        }
+        return minimum(node.left);
+    }
+
+    //用户调用寻找最大节点
+    public E maximum(){
+        if (isEmpty()){
+            throw new IllegalArgumentException("dst has been empty");
+        }
+        return maximum(root).e;
+    }
+
+    //递归方式实现寻找最大节点
+    private Node maximum(Node node){
+        if (node.right == null){
+            return node;
+        }
+        return maximum(node.right);
+    }
+
+    //用户调用删除最小节点并返回
+    public E removeMin(){
+        E e = minimum();
+        root = removeMin(root);
+        return e;
+    }
+
+    //递归方式删除最小节点
+    private Node removeMin(Node node){
+        if (node.left == null){
+            Node rightNode = node.right;
+            node.right = null;
+            size --;
+            return rightNode;
+        }
+
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    //用户调用删除最大节点并返回
+    public E removeMax(){
+        E e = maximum();
+        root = removeMax(root);
+        return e;
+    }
+
+    //递归方式删除最大节点
+    private Node removeMax(Node node){
+        if (node.right == null){
+            Node leftNode = node.left;
+            node.left = null;
+            size --;
+            return leftNode;
+        }
+
+        node.right = removeMax(node.right);
+        return node;
+    }
+
+    //用户调用的删除任意元素为e节点
+    public void remove(E e){
+        root = remove(root,e);
+    }
+
+    //递归实现删除任意元素为e，node为根的节点并返回该node
+    private Node remove(Node node,E e){
+        if (node == null){
+            return null;
+        }
+        if (e.compareTo(node.e) < 0){
+            node.left = remove(node.left,e);
+            return node;
+        }else if (e.compareTo(node.e) > 0){
+            node.right = remove(node.right,e);
+            return node;
+        }else {//e和node.e相等
+            //删除左节点为空的节点
+            if (node.left == null){
+                Node rightNode = node.right;
+                node.right = null;
+                size --;
+                return rightNode;
+            }
+            //删除右节点为空的节点
+            if (node.right == null){
+                Node leftNode = node.left;
+                node.left = null;
+                size --;
+                return leftNode;
+            }
+
+            //删除左右节点都不为空的节点
+            Node successor = minimum(node.right);
+            successor.right = removeMin(node.right);
+            size ++;
+            successor.left = node.left;
+            node.left = null;
+            node.right = null;
+            size --;
+            return successor;
+
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -164,7 +301,11 @@ public class BST<E extends Comparable<E>> {
 
     public static void main(String[] args) {
         BST<Integer> bst = new BST<>();
-        int[] arr = {5,3,6,8,4,2};
+        /*int[] arr = new int[20];
+        for (int i = 0; i < 20; i++) {
+            arr[i] = new Random().nextInt(1000);
+        }*/
+        int[] arr = {5,3,6,2,4,8};
         for (int i:arr) {
             bst.add(i);
         }
@@ -176,5 +317,20 @@ public class BST<E extends Comparable<E>> {
         bst.inOrder();
         System.out.println("后序遍历结果:");
         bst.postOrder();
+        System.out.println("层序遍历结果：");
+        bst.levelOrder();
+        System.out.println("bst中的最小元素：" + bst.minimum());
+        System.out.println("bst中的最大元素：" + bst.maximum());
+        /*System.out.println("删除的最小元素为：" + bst.removeMin());
+        System.out.println("删除最小元素的结果为：");
+        System.out.println(bst);
+        System.out.println("删除的最大元素为：" + bst.removeMax());
+        System.out.println("删除最大元素的结果为：");
+        System.out.println(bst);*/
+        System.out.println("删除元素为3的节点结果是：");
+        bst.remove(3);
+        System.out.println(bst);
+
+
     }
 }
