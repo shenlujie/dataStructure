@@ -21,16 +21,12 @@ public class LinkedListMap<K,V> implements Map<K,V> {
             this.next = next;
         }
 
-        public Node(K key, V value) {
-            this.key = key;
-            this.value = value;
-            next = null;
+        public Node(K key) {
+            this(key,null,null);
         }
 
         public Node(){
-            key = null;
-            value = null;
-            next = null;
+            this(null,null,null);
         }
 
         @Override

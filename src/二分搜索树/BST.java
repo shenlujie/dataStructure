@@ -5,7 +5,6 @@ import 栈和队列.LoopQueue;
 import 栈和队列.Queue;
 import 栈和队列.Stack;
 
-import java.util.Random;
 
 public class BST<E extends Comparable<E>> {
     private class Node{
