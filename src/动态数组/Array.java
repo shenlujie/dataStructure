@@ -157,9 +157,9 @@ public class Array<E> {
             throw new IllegalArgumentException("index1 & index2 illegal");
         }
 
-        int temp = index1;
-        index1 = index2;
-        index2 = temp;
+        E temp = data[index1];
+        data[index1] = data[index2];
+        data[index2] = temp;
     }
 
     @Override
