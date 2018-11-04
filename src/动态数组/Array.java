@@ -21,6 +21,15 @@ public class Array<E> {
         this(10);
     }
 
+    //添加一个新的构造函数，允许用户传入一个数组并进行初始化
+    public Array(E[] arr){
+        data = (E[])new Object[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            data[i] = arr[i];
+        }
+        size = arr.length;
+    }
+
     //查询当前数组元素个数
     public int getSize(){
         return size;
@@ -140,6 +149,17 @@ public class Array<E> {
             return true;
         }
         return false;
+    }
+
+    //两元素交换操作
+    public void swap(int index1,int index2){
+        if (index1<0 || index1>size || index2<0 || index2>size){
+            throw new IllegalArgumentException("index1 & index2 illegal");
+        }
+
+        int temp = index1;
+        index1 = index2;
+        index2 = temp;
     }
 
     @Override
