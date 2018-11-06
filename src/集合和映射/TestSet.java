@@ -30,8 +30,12 @@ public class TestSet {
     public static void main(String[] args) {
         BSTSet<String> bstSet = new BSTSet<>();
         System.out.println("BSTSet共耗时： " + countTime(bstSet) + "s");
+        System.out.println();
         LinkedListSet<String> linkedListSet = new LinkedListSet<>();
         System.out.println("LinkedListSet共耗时: " + countTime(linkedListSet) + "s");
+        System.out.println();
+        AVLSet<String> avlSet = new AVLSet<>();
+        System.out.println("AVLSet共耗时: " + countTime(avlSet) + "s");
 
     }
 }

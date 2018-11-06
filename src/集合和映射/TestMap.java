@@ -31,10 +31,13 @@ public class TestMap {
 
     public static void main(String[] args) {
         BSTMap<String,Integer> bstMap = new BSTMap<>();
-        System.out.println("BSTSet共耗时： " + countTime(bstMap) + "s");
+        System.out.println("BSTMap共耗时： " + countTime(bstMap) + " s");
         System.out.println();
         LinkedListMap<String,Integer> linkedListMap = new LinkedListMap<>();
-        System.out.println("LinkedListSet共耗时: " + countTime(linkedListMap) + "s");
+        System.out.println("LinkedListMap共耗时: " + countTime(linkedListMap) + " s");
+        System.out.println();
+        AVLMap<String,Integer> avlMap = new AVLMap<>();
+        System.out.println("AVLMap共耗时： " + countTime(avlMap) + " s");
 
     }
 }
