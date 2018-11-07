@@ -1,5 +1,6 @@
 package AVL;
 
+import 红黑树.RBTree;
 import 集合和映射.BSTMap;
 import 集合和映射.FileOperation;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * @Description: 测试BST和AVL的性能差距
+ * @Description: 测试BST、AVL、RBTree的性能差距
  * @create: 2018/11/6
  * @Author: SLJ
  */
@@ -39,7 +40,7 @@ public class TestTree {
             System.out.println();
 
             //测试AVL
-            long startTime1 = System.nanoTime();
+            startTime = System.nanoTime();
             AVLTree<String,Integer> avlTree = new AVLTree<>();
             for (String word:arrayList) {
                 if (avlTree.contains(word)){
@@ -52,9 +53,27 @@ public class TestTree {
             for (String word:arrayList) {
                 avlTree.contains(word);
             }
-            long endTime1 = System.nanoTime();
-            double timeAVL = (endTime1 - startTime1)/1000000000.0;
+            endTime = System.nanoTime();
+            double timeAVL = (endTime - startTime)/1000000000.0;
             System.out.println("AVL执行以上代码共耗时：" + timeAVL + " s");
+
+            //测试RBTree
+            startTime = System.nanoTime();
+            RBTree<String,Integer> rbTree = new RBTree<>();
+            for (String word:arrayList) {
+                if (rbTree.contains(word)){
+                    rbTree.set(word,bstMap.get(word)+1);
+                }else {
+                    rbTree.add(word,1);
+                }
+
+            }
+            for (String word:arrayList) {
+                rbTree.contains(word);
+            }
+            endTime = System.nanoTime();
+            double timeRB = (endTime - startTime)/1000000000.0;
+            System.out.println("RBtree执行以上代码共耗时：" + timeRB + " s");
 
         }
     }
