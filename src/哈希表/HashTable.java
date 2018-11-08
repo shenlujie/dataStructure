@@ -5,6 +5,7 @@ import java.util.TreeMap;
 /**
  * @Description: 用TreeMap数组来实现一个HashTable(是存在bug的，HashTable内部是由TreeMap实现的，而TreeMap的key必须是继承自Comparable的，
  * 自己实现的HashTabled的key是不支持进行比较的，所以当key值为不可比较的值时，add操作就会报错)
+ * 均摊时间复杂度为O（1）
  * @create: 2018/11/7
  * @Author: SLJ
  */
