@@ -1,9 +1,6 @@
 package 红黑树;
 
 import AVL.AVLTree;
-import 二分搜索树.BST;
-import 集合和映射.AVLMap;
-import 集合和映射.AVLSet;
 import 集合和映射.BSTMap;
 
 import java.util.ArrayList;
@@ -48,7 +45,7 @@ public class TreeAddTest {
         RBTree<Integer,Integer> rbTree = new RBTree<>();
         for (Integer integer : arrayList) {
             rbTree.add(integer,null);
-        }
+          }
         long endTime2 = System.nanoTime();
         double totalTime2 = (endTime2 - startTime2)/1000000000.0;
         System.out.println("RBTree共耗时：" + totalTime2);

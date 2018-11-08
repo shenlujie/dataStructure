@@ -1,5 +1,6 @@
 package AVL;
 
+import 哈希表.HashTable;
 import 红黑树.RBTree;
 import 集合和映射.BSTMap;
 import 集合和映射.FileOperation;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * @Description: 测试BST、AVL、RBTree的性能差距
+ * @Description: 测试BST、AVL、RBTree、HashTable的性能差距
  * @create: 2018/11/6
  * @Author: SLJ
  */
@@ -17,7 +18,7 @@ public class TestTree {
         ArrayList<String> arrayList = new ArrayList<>();
         if (FileOperation.readFile("B:\\dataStructure\\src\\集合和映射\\傲慢与偏见.txt",arrayList)){
 
-            Collections.sort(arrayList);
+            //Collections.sort(arrayList);
 
             //测试BST
             long startTime = System.nanoTime();
@@ -44,7 +45,7 @@ public class TestTree {
             AVLTree<String,Integer> avlTree = new AVLTree<>();
             for (String word:arrayList) {
                 if (avlTree.contains(word)){
-                    avlTree.set(word,bstMap.get(word)+1);
+                    avlTree.set(word,avlTree.get(word)+1);
                 }else {
                     avlTree.add(word,1);
                 }
@@ -62,7 +63,7 @@ public class TestTree {
             RBTree<String,Integer> rbTree = new RBTree<>();
             for (String word:arrayList) {
                 if (rbTree.contains(word)){
-                    rbTree.set(word,bstMap.get(word)+1);
+                    rbTree.set(word,rbTree.get(word)+1);
                 }else {
                     rbTree.add(word,1);
                 }
@@ -74,6 +75,24 @@ public class TestTree {
             endTime = System.nanoTime();
             double timeRB = (endTime - startTime)/1000000000.0;
             System.out.println("RBtree执行以上代码共耗时：" + timeRB + " s");
+
+            //测试HashTable
+            startTime = System.nanoTime();
+            HashTable<String,Integer> hashTable = new HashTable<>();
+            for (String word:arrayList) {
+                if (hashTable.contains(word)){
+                    hashTable.set(word,hashTable.get(word)+1);
+                }else {
+                    hashTable.add(word,1);
+                }
+
+            }
+            for (String word:arrayList) {
+                hashTable.contains(word);
+            }
+            endTime = System.nanoTime();
+            double timeHtable = (endTime - startTime)/1000000000.0;
+            System.out.println("HashTable执行以上代码共耗时：" + timeHtable + " s");
 
         }
     }
