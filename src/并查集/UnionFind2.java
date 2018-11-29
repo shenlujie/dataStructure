@@ -21,14 +21,14 @@ public class UnionFind2 implements UF {
         return parent.length;
     }
 
-    //查看p和q元素是否属于同一个集合
+    //查看p和q元素是否属于同一个集合（是否在一棵树上）
     //O（h）复杂度，h为树的高度
     @Override
     public boolean isConnected(int p, int q) {
         return find(p) == find(q);
     }
 
-    //合并p和q元素的集合
+    //合并p和q元素到一棵树上，q的根节点指向p的根节点
     //O（h）复杂度，h为树的高度
     @Override
     public void unionElements(int p, int q) {
@@ -40,7 +40,7 @@ public class UnionFind2 implements UF {
         parent[pROOT] = qROOT;
     }
 
-    //查找元素P所对应的集合编号
+    //查找元素P所对应的树的根
     //O（h）复杂度，h为树的高度
     private int find(int p){
         if (p < 0 || p >= parent.length){
